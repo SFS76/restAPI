@@ -1,9 +1,11 @@
 package ru.hogwart.school.service;
 
+import org.springframework.stereotype.Service;
 import ru.hogwart.school.entities.Faculty;
 
 import java.util.HashMap;
 
+@Service
 public class FacultyServiceImpl implements FacultyService{
 
     private final HashMap<Long, Faculty> faculties = new HashMap<>();

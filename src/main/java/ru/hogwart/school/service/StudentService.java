@@ -1,7 +1,9 @@
 package ru.hogwart.school.service;
 
+import org.springframework.stereotype.Service;
 import ru.hogwart.school.entities.Student;
 
+@Service
 public interface StudentService {
 
     Student addStudent(Student student);
