@@ -36,3 +36,5 @@ public class FacultyServiceImpl implements FacultyService{
         return facultyRepository.findByColor(color);
     }
 }
+
+
