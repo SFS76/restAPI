@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.hogwart.school.entities.Student;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -31,5 +32,9 @@ public class StudentServiceImpl implements StudentService {
 
     public void deleteStudent(long id) {
         students.remove(id);
+    }
+
+    public List<Student> getAllByAge(int age) {
+        return students.values().stream().filter(it -> it.getAge() == age).toList();
     }
 }
