@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwart.school.entities.Faculty;
 import ru.hogwart.school.service.FacultyService;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("faculty")
 public class FacultyController {
@@ -14,9 +16,9 @@ public class FacultyController {
     public FacultyController(FacultyService facultyService) {this.facultyService = facultyService;}
 
     @GetMapping("{id}")
-    public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id) {
-        Faculty faculty = facultyService.findFaculty(id);
-        if (faculty == null) {
+    public ResponseEntity<Optional<Faculty>> getFacultyInfo(@PathVariable Long id) {
+        Optional<Faculty> faculty = facultyService.findFaculty(id);
+        if (faculty.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(faculty);
