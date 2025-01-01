@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.hogwart.school.entities.Faculty;
 import ru.hogwart.school.repository.FacultyRepository;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FacultyServiceImpl implements FacultyService{
@@ -20,7 +20,7 @@ public class FacultyServiceImpl implements FacultyService{
         return facultyRepository.save(faculty);
     }
 
-    public Faculty findFaculty(long id) {
+    public Optional<Faculty> findFaculty(long id) {
         return facultyRepository.findById(id);
     }
 

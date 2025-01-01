@@ -20,7 +20,7 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.save(student);
     }
 
-    public Student findStudent(long id) {
+    public Optional<Student> findStudent(long id) {
         return studentRepository.findById(id);
     }
 
