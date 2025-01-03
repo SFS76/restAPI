@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwart.school.entities.Faculty;
 import ru.hogwart.school.service.FacultyService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("faculty")
+@RequestMapping("/faculty")
 public class FacultyController {
     private final FacultyService facultyService;
 
@@ -40,5 +41,10 @@ public class FacultyController {
     public ResponseEntity<Void> deleteFaculty(@PathVariable Long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping ("find")
+    public List<Faculty> findByNameIgnoreCaseOrColorIgnoreCase(String query) {
+        return facultyService.findByNameIgnoreCaseOrColorIgnoreCase(query, query);
     }
 }

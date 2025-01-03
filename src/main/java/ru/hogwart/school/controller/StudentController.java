@@ -1,11 +1,13 @@
 package ru.hogwart.school.controller;
 
+import jakarta.persistence.GeneratedValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwart.school.entities.Student;
 import ru.hogwart.school.service.StudentService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -40,4 +42,7 @@ public class StudentController {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("find")
+    public List<Student> findByAgeBetween(int from, int to) {return studentService.findByAgeBetween(from,to);}
 }
