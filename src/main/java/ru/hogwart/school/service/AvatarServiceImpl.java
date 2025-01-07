@@ -1,6 +1,7 @@
 package ru.hogwart.school.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwart.school.entities.Avatar;
 import ru.hogwart.school.entities.Student;
@@ -16,6 +17,7 @@ import java.nio.file.Path;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
+@Service
 public class AvatarServiceImpl implements AvatarService{
 
     private final AvatarRepository avatarRepository;
