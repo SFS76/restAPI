@@ -32,8 +32,10 @@ public class FacultyServiceImpl implements FacultyService{
         facultyRepository.deleteById(id);
     }
 
-    public List<Faculty> getAllByColor(String color) {
-        return facultyRepository.findByColor(color);
+    public List<Faculty> getAllByColor(String color) { return facultyRepository.findByColor(color); }
+
+    public List<Faculty> findByNameIgnoreCaseOrColorIgnoreCase(String name, String color) {
+        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
 }
 
