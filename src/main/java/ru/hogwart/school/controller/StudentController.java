@@ -26,7 +26,9 @@ public class StudentController {
     }
 
     @PostMapping
-    public Student createStudent(@RequestBody Student student) {return studentService.addStudent(student);}
+    public Student createStudent(@RequestBody Student student) {
+        return studentService.addStudent(student);
+    }
 
     @PutMapping("{id}")
     public ResponseEntity<Student> editStudent(@RequestBody Student student, @PathVariable Long id) {

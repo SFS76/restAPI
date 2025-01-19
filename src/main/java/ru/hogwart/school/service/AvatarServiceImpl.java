@@ -22,6 +22,7 @@ public class AvatarServiceImpl implements AvatarService{
 
     private final AvatarRepository avatarRepository;
     private final StudentRepository studentRepository;
+    private final int BUFFER_SIZE = 1024;
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
@@ -39,8 +40,8 @@ public class AvatarServiceImpl implements AvatarService{
         try (
             InputStream is = avatarFile.getInputStream();
             OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
-            BufferedInputStream bis = new BufferedInputStream(is, 1024);
-            BufferedOutputStream bos = new BufferedOutputStream(os, 1024)
+            BufferedInputStream bis = new BufferedInputStream(is, BUFFER_SIZE);
+            BufferedOutputStream bos = new BufferedOutputStream(os, BUFFER_SIZE)
         ) {
             bis.transferTo(bos);
         }
@@ -56,7 +57,7 @@ public class AvatarServiceImpl implements AvatarService{
     private byte[] generateDataForDB(Path filePath) throws IOException {
         try (
                 InputStream is = Files.newInputStream(filePath);
-                BufferedInputStream bis = new BufferedInputStream(is, 1024);
+                BufferedInputStream bis = new BufferedInputStream(is, BUFFER_SIZE);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             BufferedImage image = ImageIO.read(bis);
 

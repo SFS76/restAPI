@@ -12,6 +12,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/faculty")
 public class FacultyController {
+
     private final FacultyService facultyService;
 
     public FacultyController(FacultyService facultyService) {this.facultyService = facultyService;}

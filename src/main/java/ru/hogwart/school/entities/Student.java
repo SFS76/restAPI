@@ -1,5 +1,6 @@
 package ru.hogwart.school.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -7,27 +8,28 @@ import java.util.Objects;
 @Entity
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Long id;
     private String name;
     private int age;
-    @ManyToOne
-    @JoinColumn(name = "faculty_id")
-    private Faculty faculty;
 
-    public Student() {}
-
-    public Student(long id, String name, int age) {
-        this.id = id;
+    public Student(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    public long getId() {
+    @ManyToOne
+    @JoinColumn(name = "faculty_id")
+
+
+    private Faculty faculty;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
