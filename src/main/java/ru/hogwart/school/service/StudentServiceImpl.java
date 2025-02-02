@@ -1,6 +1,7 @@
 package ru.hogwart.school.service;
 
 import org.springframework.stereotype.Service;
+import ru.hogwart.school.entities.CountStudentByFaculty;
 import ru.hogwart.school.entities.Student;
 import ru.hogwart.school.repository.StudentRepository;
 
@@ -39,4 +40,6 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findByAgeBetween(int from, int to) {
         return studentRepository.findByAgeBetween(from, to);
     }
+
+    public List<CountStudentByFaculty> countStudentByFaculties() {return studentRepository.countStudentByFaculty();}
 }
