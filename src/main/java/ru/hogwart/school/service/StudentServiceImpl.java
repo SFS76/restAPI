@@ -41,5 +41,7 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findByAgeBetween(from, to);
     }
 
-    public List<CountStudentByFaculty> countStudentByFaculties() {return studentRepository.countStudentByFaculty();}
+    public Integer countStudent() {return studentRepository.countStudent();}
+
+    public List<Student> last5Student() {return studentRepository.last5Student();}
 }

@@ -16,7 +16,7 @@ public class CountStudentByFacultyController {
     }
 
     @GetMapping("/student-by-faculty")
-    public List<CountStudentByFaculty> countStudentByFaculties() {
-        return studentService.countStudentByFaculties();
+    public Integer countStudent() {
+        return studentService.countStudent();
     }
 }
