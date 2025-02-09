@@ -1,7 +1,9 @@
 package ru.hogwart.school.controller;
 
 import org.h2.tools.Server;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,24 +25,30 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public class FacultyControllerTestRsstTemplate {
 
-    @Autowired
-    private TestRestTemplate restTemplate;
-
     @LocalServerPort
     private int port;
 
     @Autowired
-    private FacultyRepository
+    private TestRestTemplate restTemplate;
+
+    @Autowired
+    private FacultyRepository facultyRepository;
 
     @BeforeAll
     public static void initTest() throws SQLException {
         Server.createWebServer("-web", "-webAllowOthers", "-webPort", "9999").start();
     }
 
+    @BeforeEach
+    public void clearDatabase() {
+        facultyRepository.deleteAll();
+    }
+
     @Test
     void shouldCreateFaculty() {
         //given
         Faculty faculty = new Faculty("Grif" ,"green");
+        //faculty = facultyRepository.save(faculty);
 
         //when
         ResponseEntity<Faculty> facultyResponseEntity = restTemplate.postForEntity(
@@ -49,7 +57,7 @@ public class FacultyControllerTestRsstTemplate {
 
         //then
         assertNotNull(facultyResponseEntity);
-        assertEquals(facultyResponseEntity.getStatusCode(), HttpStatusCode.valueOf(200));
+        assertEquals(HttpStatusCode.valueOf(200), facultyResponseEntity.getStatusCode());
 
         Faculty actualFaculty = facultyResponseEntity.getBody();
         assertNotNull(actualFaculty.getId());
@@ -70,7 +78,7 @@ public class FacultyControllerTestRsstTemplate {
 
         //then
         assertNotNull(facultyResponseEntity);
-        assertEquals(facultyResponseEntity.getStatusCode(), HttpStatusCode.valueOf(200));
+        assertEquals(HttpStatusCode.valueOf(200), facultyResponseEntity.getStatusCode());
 
         Faculty actualFaculty = facultyResponseEntity.getBody();
         assertEquals(actualFaculty.getId(), faculty.getId());
@@ -87,14 +95,14 @@ public class FacultyControllerTestRsstTemplate {
         Faculty facultyForUpdate = new Faculty("3Grif3" ,"3green3");
 
         //when
-        HttpEntity<Faculty> entity = new HttpEntity<>(facultyForUpdate):
+        HttpEntity<Faculty> entity = new HttpEntity<>(facultyForUpdate);
         ResponseEntity<Faculty> facultyResponseEntity = restTemplate.exchange(
                 "http://localhost:" + port + "/faculty" + faculty.getId(), HttpMethod.PUT, entity, Faculty.class
         );
 
         //then
         assertNotNull(facultyResponseEntity);
-        assertEquals(facultyResponseEntity.getStatusCode(), HttpStatusCode.valueOf(200));
+        assertEquals(HttpStatusCode.valueOf(200), facultyResponseEntity.getStatusCode());
 
         Faculty actualFaculty = facultyResponseEntity.getBody();
         assertEquals(actualFaculty.getId(), faculty.getId());
