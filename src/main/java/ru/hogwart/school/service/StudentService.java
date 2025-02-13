@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public interface StudentService {
 
-    Logger logger = LoggerFactory.getLogger(StudentService.class);
+    static final Logger logger = LoggerFactory.getLogger(StudentService.class);
 
     Student addStudent(Student student);
     Optional<Student> findStudent(long id);
