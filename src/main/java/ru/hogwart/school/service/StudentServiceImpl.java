@@ -18,18 +18,23 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public Student addStudent(Student student) {
+        logger.debug("Was create student {}", student);
         return studentRepository.save(student);
     }
 
     public Optional<Student> findStudent(long id) {
+        logger.info("Was find student id{}", id);
         return studentRepository.findById(id);
     }
 
     public Student editStudent(long id, Student student) {
+        logger.info("Was change student id{}", id);
+        logger.debug("Was change student {}", student);
         return studentRepository.save(student);
     }
 
     public void deleteStudent(long id) {
+        logger.info("Was delete student id{}", id);
         studentRepository.deleteById(id);
     }
 
