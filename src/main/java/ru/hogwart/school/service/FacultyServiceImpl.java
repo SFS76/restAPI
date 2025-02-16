@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.hogwart.school.entities.Faculty;
 import ru.hogwart.school.repository.FacultyRepository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,14 @@ public class FacultyServiceImpl implements FacultyService{
     public List<Faculty> getAllByColor(String color) { return facultyRepository.findByColor(color); }
 
     public List<Faculty> findByNameIgnoreCaseOrColorIgnoreCase(String name, String color) {
-        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name, color);
+        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name, color); }
+
+    public String getLongestFacultyName() {
+        return facultyRepository.findAll()
+                .stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparing(String::length))
+                .orElse("");
     }
 }
 
