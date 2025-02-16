@@ -7,6 +7,7 @@ import ru.hogwart.school.repository.StudentRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -51,4 +52,22 @@ public class StudentServiceImpl implements StudentService {
     public Integer avgAgeStudent() {return studentRepository.avgAgeStudent();}
 
     public List<Student> last5Student() {return studentRepository.last5Student();}
+
+    @Override
+    public List<String> getAllStudentNameStartA() {
+        return studentRepository.findAll()
+                .stream()
+                .map(Student::getName)
+                .filter(it -> it.startsWith("A"))
+                .map(String::toUpperCase)
+                .sorted()
+                .toList();
+    }
+
+    @Override
+    public Double getAvgAgeStudent() {
+        return studentRepository.findAll()
+                .stream()
+                .collect(Collectors.averagingInt(Student::getAge));
+    }
 }

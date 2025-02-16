@@ -51,4 +51,13 @@ public class StudentController {
     @GetMapping("last5")
     public List<Student> last5Student () {return studentService.last5Student();}
 
+    @GetMapping("getAllStudentNameStartA")
+    public List<String> getAllStudentNameStartA() {
+        return studentService.getAllStudentNameStartA();
+    }
+
+    @GetMapping("getAvgAgeStudent")
+    public Double getAvgAgeStudent() {
+        return studentService.getAvgAgeStudent();
+    }
 }
