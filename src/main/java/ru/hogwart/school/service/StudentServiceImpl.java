@@ -70,4 +70,39 @@ public class StudentServiceImpl implements StudentService {
                 .stream()
                 .collect(Collectors.averagingInt(Student::getAge));
     }
+
+    @Override
+    public void printParallel() {
+        List<Student> students = studentRepository.findAll();
+        System.out.println("Thread 0" + students.get(0).getName());
+        System.out.println("Thread 0" + students.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println("Thread 1" + students.get(2).getName());
+            System.out.println("Thread 1" + students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println("Thread 2" + students.get(4).getName());
+            System.out.println("Thread 2" + students.get(5).getName());
+        }).start();
+    }
+
+    @Override
+    public void printSynchronized() {
+        List<Student> students = studentRepository.findAll();
+        synchronized (this) {System.out.println("Thread 0" + students.get(0).getName());}
+        synchronized (this) {System.out.println("Thread 0" + students.get(1).getName());}
+
+        new Thread(() -> {
+            synchronized (this) {System.out.println("Thread 1" + students.get(2).getName());}
+            synchronized (this) {System.out.println("Thread 1" + students.get(3).getName());}
+        }).start();
+
+        new Thread(() -> {
+            synchronized (this) {System.out.println("Thread 2" + students.get(4).getName());}
+            synchronized (this) {System.out.println("Thread 2" + students.get(5).getName());}
+        }).start();
+    }
+
 }
